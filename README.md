@@ -21,12 +21,13 @@ const nextConfig = {
   experimental: {
     staleTimes: {
       dynamic: 3,
+      static: 10,
     },
   },
 };
 ```
 
-I expect that staleTimes is applied all times, but it is not applied after the first time.
+I expect that `staleTimes.static` is applied all times, but it is not applied after the first time.
 
 ## Provide environment information
 
