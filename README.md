@@ -1,25 +1,56 @@
-# Welcome to Next.js
+# Next.js `staleTimes` behavior issue Demo
 
-This is the most minimal starter for your Next.js project.
+title: Once the Router Cache is used once, the value of `staleTimes.dynamic` is applied the next time.
 
-## Deploy your own
+## To Reproduce
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/vercel/next.js/tree/canary/examples/hello-world&project-name=hello-world&repository-name=hello-world)
+1. `pnpm clean-start`.
+2. Access `http://localhost:3000`.
+3. Click link to `/static`.
+4. Your devtools network tab show that the request is **not** made.
+5. Browser back to `/` soon(under 3 seconds).
+6. Click link to `/static` again.
+7. Your devtools network tab show that the request is made.
 
-## How to use
+## Current vs. Expected behavior
 
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init), [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/), or [pnpm](https://pnpm.io) to bootstrap the example:
+My `staleTimes` configuration is:
 
-```bash
-npx create-next-app --example hello-world hello-world-app
+```ts
+const nextConfig = {
+  experimental: {
+    staleTimes: {
+      dynamic: 3,
+    },
+  },
+};
 ```
 
-```bash
-yarn create next-app --example hello-world hello-world-app
+I expect that staleTimes is applied all times, but it is not applied after the first time.
+
+## Provide environment information
+
+```shell session
+$ pnpm next info
+
+Operating System:
+  Platform: darwin
+  Arch: arm64
+  Version: Darwin Kernel Version 23.3.0: Wed Dec 20 21:30:44 PST 2023; root:xnu-10002.81.5~7/RELEASE_ARM64_T6000
+  Available memory (MB): 65536
+  Available CPU cores: 10
+Binaries:
+  Node: 20.12.2
+  npm: 9.8.0
+  Yarn: 1.22.22
+  pnpm: 8.15.7
+Relevant Packages:
+  next: 14.2.3 // Latest available version is detected (14.2.3).
+  eslint-config-next: N/A
+  react: 18.3.1
+  react-dom: 18.3.1
+  typescript: 5.4.5
+Next.js Config:
+  output: N/A
 ```
 
-```bash
-pnpm create next-app --example hello-world hello-world-app
-```
-
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).

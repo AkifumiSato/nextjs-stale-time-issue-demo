@@ -2,8 +2,7 @@
 const nextConfig = {
   experimental: {
     staleTimes: {
-      dynamic: 0, // v15 RC default
-      static: 10,
+      dynamic: 3,
     },
   },
 };
