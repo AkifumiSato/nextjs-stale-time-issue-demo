@@ -3,7 +3,8 @@
   "scripts": {
     "dev": "next dev --turbo",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "clean-start": "rm -rf .next && pnpm build && pnpm start"
   },
   "dependencies": {
     "next": "latest",

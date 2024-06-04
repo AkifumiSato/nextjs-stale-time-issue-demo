@@ -3,10 +3,11 @@ import Link from "next/link";
 export default function Home() {
   return (
     <main>
-      <h1>Top page</h1>
+      <h1>Static Page</h1>
       <p>
-        <Link href="/static">static page</Link>
+        <Link href="/">Top page</Link>
       </p>
+      <p>random: {Math.random()}</p>
     </main>
   );
 }
